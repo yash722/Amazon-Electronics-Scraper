@@ -31,21 +31,18 @@ def get_pic_url(soup):
     return img_str
 
 
-if __name__ == '__main__':
-    HEADERS = ({'User-Agent':
-                'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36',
-                'Accept-Language': 'en-US, en;q=0.5'})
-    query = input("Enter product you want to search about(Electronics):- ")
-    query = "+".join(query.split(" ")).lower()
-    starting_url = f'https://www.amazon.in/s?k={query}&ref=nb_sb_noss_2'
-    webpage = requests.get(starting_url, headers = HEADERS)
-    soup = BeautifulSoup(webpage.content, "lxml")
-    prods = []
-    res = soup.find_all("div", attrs = {"data-component-type":"s-search-result"})
-    print("\nSEARCH RESULTS FOR FIRST PAGE: - \n\n")
-    for i in res:
-        print("Product Name =", get_name(i))
-        print("Product Selling Price =", get_price(i))
-        print("Product Rating =", get_rating(i))
-        print("Product Image =", get_pic_url(i))
-        print("\n-----------------------------------------------------------------------------------------------\n")
+HEADERS = ({'User-Agent':'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36','Accept-Language': 'en-US, en;q=0.5'})
+query = input("Enter product you want to search about(Electronics):- ")
+query = "+".join(query.split(" ")).lower()
+starting_url = f'https://www.amazon.in/s?k={query}&ref=nb_sb_noss_2'
+webpage = requests.get(starting_url, headers = HEADERS)
+soup = BeautifulSoup(webpage.content, "lxml")
+prods = []
+res = soup.find_all("div", attrs = {"data-component-type":"s-search-result"})
+print("\nSEARCH RESULTS FOR FIRST PAGE: - \n\n")
+for i in res:
+    print("Product Name =", get_name(i))
+    print("Product Selling Price =", get_price(i))
+    print("Product Rating =", get_rating(i))
+    print("Product Image =", get_pic_url(i))
+    print("\n-----------------------------------------------------------------------------------------------\n")
